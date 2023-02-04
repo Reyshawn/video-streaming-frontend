@@ -2,7 +2,7 @@
   <form class="login-form">
     <h1>Login</h1>
     <div>
-      <label for="">username</label>
+      <label for="" class="text-red-100">username</label>
       <input type="text">
     </div>
     <div>
@@ -25,13 +25,11 @@
   margin: 20% auto 0;
   width: 300px;
 
+  h1 {
+    @apply text-red-900;
+  }
   
 }
-
-h1 {
-    text-align: center;
-  }
-
 
 
 </style>
