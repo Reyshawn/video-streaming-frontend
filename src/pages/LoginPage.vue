@@ -1,8 +1,15 @@
 <template>
-  <div>this is a login page</div>
-  <!-- <video id="videoPlayer" controls muted="true" autoplay> 
-    <source src="http://localhost:3000/stream/3" type="video/mp4">
-  </video> -->
+  <form class="login-form">
+    <h1>Login</h1>
+    <div>
+      <label for="">username</label>
+      <input type="text">
+    </div>
+    <div>
+      <label for="">password</label>
+      <input type="text">
+    </div>
+  </form>
 </template>
 
 
@@ -11,10 +18,20 @@
 </script>
 
 
-<style scoped>
+<style lang="postcss" scoped>
 
-#videoPlayer {
+.login-form {
+  outline: 1px solid teal;
+  margin: 20% auto 0;
   width: 300px;
-  height: auto;
+
+  
 }
+
+h1 {
+    text-align: center;
+  }
+
+
+
 </style>
