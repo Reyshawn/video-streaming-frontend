@@ -13,4 +13,6 @@ button {
 
 #app {
   height: 100vh;
+  @apply
+    bg-slate-100;
 }

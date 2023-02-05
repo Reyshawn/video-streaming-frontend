@@ -85,8 +85,8 @@ nav {
 }
 
 main {
-  height: 650px;
-  max-height: 650px;
+  height: calc(100vh - 120px);
+  max-height: calc(100vh - 120px);;
   @apply
     px-8
     flex
@@ -114,6 +114,7 @@ footer {
   bottom: 0px;
   height: 60px;
   @apply
+    bg-slate-100
     w-full
     flex
     items-center
@@ -129,6 +130,14 @@ footer {
       text-teal-700
       hover:border-b
       hover:border-teal-700;
+  }
+}
+
+@media (min-width: 1200px) { 
+  main, .navigation-bar {
+    width: 1200px;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 }
 
