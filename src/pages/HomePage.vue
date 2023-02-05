@@ -85,6 +85,8 @@ nav {
 }
 
 main {
+  height: 650px;
+  max-height: 650px;
   @apply
     px-8
     flex
