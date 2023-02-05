@@ -5,3 +5,8 @@
 textarea:focus, input:focus{
   outline: none;
 }
+
+button {
+  @apply
+    select-none;
+}
