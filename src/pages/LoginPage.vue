@@ -3,20 +3,36 @@
     <h1 class="login-form-title">Login</h1>
     <div class="login-form-field">
       <label for="">Username</label>
-      <input type="text">
+      <input type="text" v-model="username">
     </div>
     <div class="login-form-field">
       <label for="">Password</label>
-      <input type="password">
+      <input type="password" v-model="password">
     </div>
     <div class="login-form-buttons">
-      <button @click.prevent="">Sign in</button>
+      <button @click.prevent="onClickSignIn">Sign in</button>
     </div>
   </form>
 </template>
 
 
 <script setup lang="ts">
+import { ref } from 'vue';
+import { login } from '../apis/users';
+import { router } from '../routes';
+
+const username = ref('')
+const password = ref('')
+
+
+const onClickSignIn = async () => {
+  try {
+    await login(username.value, password.value)
+    router.push({ path: '/', replace: true })
+  } catch (err) {
+    throw err
+  }
+}
 
 </script>
 
