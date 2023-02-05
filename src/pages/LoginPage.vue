@@ -1,18 +1,20 @@
 <template>
-  <form class="login-form">
-    <h1 class="login-form-title">Login</h1>
-    <div class="login-form-field">
-      <label for="">Username</label>
-      <input type="text" v-model="username">
-    </div>
-    <div class="login-form-field">
-      <label for="">Password</label>
-      <input type="password" v-model="password">
-    </div>
-    <div class="login-form-buttons">
-      <button @click.prevent="onClickSignIn">Sign in</button>
-    </div>
-  </form>
+  <div class="login-form-container">
+    <form class="login-form">
+      <h1 class="login-form-title">Login</h1>
+      <div class="login-form-field">
+        <label for="">Username</label>
+        <input type="text" v-model="username">
+      </div>
+      <div class="login-form-field">
+        <label for="">Password</label>
+        <input type="password" v-model="password">
+      </div>
+      <div class="login-form-buttons">
+        <button @click.prevent="onClickSignIn">Sign in</button>
+      </div>
+    </form>
+  </div>
 </template>
 
 
@@ -41,10 +43,18 @@ const onClickSignIn = async () => {
 
 <style lang="postcss">
 
-.login-form {
-  margin: 20% auto 0;
-  width: 300px;
+.login-form-container {
+  padding-top: 15%;
+  background-color: white;
+  @apply
+    w-full
+    h-full;
+}
 
+
+.login-form {
+  margin: 0 auto 0;
+  width: 300px;
   @apply
     border
     rounded-md

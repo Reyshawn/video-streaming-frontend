@@ -7,7 +7,7 @@
       <div class="navigation-bar-right">
         <img src="/vite.svg" alt="user avatar">
         <span class="navigation-bar-username">kiki</span>
-        <button>
+        <button @click="onClickLogout">
           Log out
         </button>
       </div>
@@ -30,6 +30,12 @@
 <script setup lang="ts">
 import playlist from '../components/playlist.vue'
 import player from '../components/player.vue'
+import { router } from '../routes';
+
+const onClickLogout = () => {
+  localStorage.removeItem('token')
+  router.push({ path: '/login', replace: true })
+}
 
 </script>
 
