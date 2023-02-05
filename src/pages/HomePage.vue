@@ -14,7 +14,13 @@
     </div>
   </nav>
   <main>
-    this is main
+    <div class="left-pane">
+      <player />
+      <div class="comments"></div>
+    </div>
+    <div class="right-pane">
+      <playlist />
+    </div>
   </main>
   <footer>
     this is footer
@@ -22,6 +28,8 @@
 </template>
 
 <script setup lang="ts">
+import playlist from '../components/playlist.vue'
+import player from '../components/player.vue'
 
 </script>
 
@@ -77,7 +85,27 @@ nav {
 }
 
 main {
-  outline: 1px solid teal;
+  height: 400px;
+  @apply
+    px-8
+    flex
+    justify-between
+    gap-x-5;
+
+  .left-pane{
+    width: auto;
+
+    @apply
+      grow
+      my-5;
+  }
+
+  .right-pane {
+    width: 250px;
+
+    @apply
+      my-5;
+  }
 }
 
 </style>
