@@ -27,7 +27,9 @@ const password = ref('')
 
 const onClickSignIn = async () => {
   try {
-    await login(username.value, password.value)
+    const response = await login(username.value, password.value)
+    const accessToken = response.access_token
+    localStorage.setItem('token', accessToken)
     router.push({ path: '/', replace: true })
   } catch (err) {
     throw err
