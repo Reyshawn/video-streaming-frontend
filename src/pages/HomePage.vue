@@ -3,11 +3,12 @@
     <div class="navigation-bar">
       <div class="navigation-bar-left">
         <h1>Video Steaming Application</h1>
+        <button class="upload-button">Upload</button>
       </div>
       <div class="navigation-bar-right">
         <img src="/vite.svg" alt="user avatar">
         <span class="navigation-bar-username">kiki</span>
-        <button @click="onClickLogout">
+        <button @click="onClickLogout" class="logout-button">
           Log out
         </button>
       </div>
@@ -61,10 +62,14 @@ nav {
       @apply
         text-xl
         font-semibold
-        text-neutral-700;
+        text-neutral-700
+        border-r
+        border-slate-200
+        pr-3
+        mr-3;
     }
 
-    button {
+    .logout-button {
       margin-left: auto;
       @apply
         bg-blue-900
@@ -74,6 +79,20 @@ nav {
         py-1
         rounded-lg;
     }
+
+    .upload-button {
+      padding-top: 0.1rem;
+      padding-bottom: 0.1rem;
+      @apply
+        border-2
+        border-blue-900
+        text-sm
+        px-2
+        rounded-lg
+        hover:bg-blue-900
+        hover:text-fuchsia-50;
+    }
+
 
     &-left, &-right {
       @apply
