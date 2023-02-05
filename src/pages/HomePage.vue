@@ -23,7 +23,7 @@
     </div>
   </main>
   <footer>
-    this is footer
+    Built with ❤️ by&nbsp;<a href="https://reyshawn.com" target="_blank">Reshawn</a>
   </footer>
 </template>
 
@@ -106,6 +106,29 @@ main {
 
     @apply
       my-5;
+  }
+}
+
+footer {
+  position: absolute;
+  bottom: 0px;
+  height: 60px;
+  @apply
+    w-full
+    flex
+    items-center
+    justify-center
+    border-t
+    font-mono
+    text-xs;
+
+  a {
+    border-color: white;
+    @apply
+      border-b
+      text-teal-700
+      hover:border-b
+      hover:border-teal-700;
   }
 }
 

@@ -10,3 +10,7 @@ button {
   @apply
     select-none;
 }
+
+#app {
+  height: 100vh;
+}
