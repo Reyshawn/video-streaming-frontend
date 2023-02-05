@@ -3,7 +3,7 @@
     <div class="navigation-bar">
       <div class="navigation-bar-left">
         <h1>Video Steaming Application</h1>
-        <button class="upload-button">Upload</button>
+        <uploader />
       </div>
       <div class="navigation-bar-right">
         <img src="/vite.svg" alt="user avatar">
@@ -31,6 +31,7 @@
 <script setup lang="ts">
 import playlist from '../components/playlist.vue'
 import player from '../components/player.vue'
+import uploader from '../components/uploader.vue'
 import { router } from '../routes';
 
 const onClickLogout = () => {
@@ -79,20 +80,6 @@ nav {
         py-1
         rounded-lg;
     }
-
-    .upload-button {
-      padding-top: 0.1rem;
-      padding-bottom: 0.1rem;
-      @apply
-        border-2
-        border-blue-900
-        text-sm
-        px-2
-        rounded-lg
-        hover:bg-blue-900
-        hover:text-fuchsia-50;
-    }
-
 
     &-left, &-right {
       @apply
@@ -149,8 +136,8 @@ footer {
     text-xs;
 
   a {
-    border-color: white;
     @apply
+      border-transparent
       border-b
       text-teal-700
       hover:border-b
