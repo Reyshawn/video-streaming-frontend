@@ -85,7 +85,6 @@ nav {
 }
 
 main {
-  height: 400px;
   @apply
     px-8
     flex
