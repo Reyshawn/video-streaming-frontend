@@ -1,11 +1,19 @@
 import axios from 'axios'
-
+import { userStore } from '../store/UserStore';
+import { users } from './url';
 const instance = axios.create()
 
 
 // Add a request interceptor
 instance.interceptors.request.use(function (config) {
   // Do something before request is sent
+  const store = userStore()
+  const token = store.token
+  const url = config.url
+  if (url !== users.login && url !== users.register ) {
+    config.headers.Authorization = 'Bearer ' + token
+  }
+
   return config
 }, function (error) {
   // Do something with request error

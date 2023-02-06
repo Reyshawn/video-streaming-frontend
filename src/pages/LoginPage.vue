@@ -22,16 +22,17 @@
 import { ref } from 'vue';
 import { login } from '../apis/users';
 import { router } from '../routes';
+import { userStore } from '../store/UserStore';
 
 const username = ref('')
 const password = ref('')
-
+const store = userStore()
 
 const onClickSignIn = async () => {
   try {
     const response = await login(username.value, password.value)
     const accessToken = response.access_token
-    localStorage.setItem('token', accessToken)
+    store.setToken(accessToken)
     router.push({ path: '/', replace: true })
   } catch (err) {
     throw err

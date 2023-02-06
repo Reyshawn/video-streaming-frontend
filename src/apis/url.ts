@@ -1,5 +1,4 @@
 const baseUrl = 'http://localhost:3000'
-const videoUrl = 'http://localhost:3001'
 
 export const users = {
   login: baseUrl + '/login',
@@ -8,5 +7,5 @@ export const users = {
 }
 
 export const videos = {
-  upload: videoUrl + '/upload'
+  upload: baseUrl + '/api/video/upload'
 }

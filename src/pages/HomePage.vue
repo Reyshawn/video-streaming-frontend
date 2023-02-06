@@ -33,10 +33,13 @@ import playlist from '../components/playlist.vue'
 import player from '../components/player.vue'
 import uploader from '../components/uploader.vue'
 import { router } from '../routes';
+import { userStore } from '../store/UserStore';
+
+const store = userStore()
 
 const onClickLogout = () => {
-  localStorage.removeItem('token')
-  router.push({ path: '/login', replace: true })
+  store.removeToken()
+  window.location.reload()
 }
 
 </script>

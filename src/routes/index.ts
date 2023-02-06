@@ -1,6 +1,7 @@
-import { createRouter, createWebHistory, NavigationGuardWithThis, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import LoginPage from '../pages/LoginPage.vue'
 import HomePage from '../pages/HomePage.vue'
+import { userStore } from '../store/UserStore'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -23,8 +24,8 @@ export const router = createRouter({
  
 
 router.beforeEach((to, from) => {
-
-  const token = localStorage.getItem('token')
+  const store = userStore()
+  const token = store.token
 
   if (to.path === '/login' && token != null) {
     return '/'
