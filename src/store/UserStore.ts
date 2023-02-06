@@ -4,8 +4,17 @@ import { ref } from 'vue'
 
 const TOKEN_KEY = 'token'
 
+
+export enum Permission {
+  normal,
+  admin
+}
+
 export const userStore = defineStore('userStore', () => {
   const _token = ref('')
+  const username = ref('')
+  const role = ref(Permission.normal)
+  const id = ref<number|null>(null)
 
   function setToken(t: string) {
     localStorage.setItem(TOKEN_KEY, t)
@@ -21,5 +30,12 @@ export const userStore = defineStore('userStore', () => {
     return _token.value || localStorage.getItem(TOKEN_KEY)
   })
 
-  return { token, setToken, removeToken }
+  return {
+    token,
+    username,
+    role,
+    id,
+    setToken,
+    removeToken
+  }
 })

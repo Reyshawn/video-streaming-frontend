@@ -7,7 +7,7 @@
       </div>
       <div class="navigation-bar-right">
         <img src="/vite.svg" alt="user avatar">
-        <span class="navigation-bar-username">kiki</span>
+        <span class="navigation-bar-username">{{ store.username }}</span>
         <button @click="onClickLogout" class="logout-button">
           Log out
         </button>
@@ -32,8 +32,9 @@
 import playlist from '../components/playlist.vue'
 import player from '../components/player.vue'
 import uploader from '../components/uploader.vue'
-import { router } from '../routes';
 import { userStore } from '../store/UserStore';
+import { onMounted } from 'vue';
+import { getInfo } from '../apis/users';
 
 const store = userStore()
 
@@ -41,6 +42,17 @@ const onClickLogout = () => {
   store.removeToken()
   window.location.reload()
 }
+
+onMounted(async () => {
+  try {
+    const response = await getInfo()
+    store.username = response.username
+    store.id = response.id
+    store.role = response.role
+  } catch (err) {
+    throw err
+  }
+})
 
 </script>
 

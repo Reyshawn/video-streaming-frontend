@@ -23,3 +23,10 @@ export function register(name: string, username: string, password: string): Prom
     }
   })
 }
+
+export function getInfo(): Promise<any> {
+  return request({
+    url: users.getInfo,
+    method: 'get'
+  })
+}
