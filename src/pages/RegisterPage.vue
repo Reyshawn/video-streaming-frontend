@@ -2,10 +2,6 @@
   <div class="login-form-container">
     <form class="login-form register-form">
       <h1 class="login-form-title">Register</h1>
-      <div class="login-form-field register-form-field">
-        <label for="">Name</label>
-        <input type="text" v-model="name" placeholder="Type name">
-      </div>
       <div class="login-form-field register-form-field required">
         <label for="">Username</label>
         <input type="text" v-model="username" placeholder="Type username">
@@ -38,7 +34,6 @@ import { register } from '../apis/users';
 import { router } from '../routes';
 import { userStore } from '../store/UserStore';
 
-const name = ref('')
 const username = ref('')
 const password = ref('')
 const repeatedPassword = ref('')
@@ -56,7 +51,7 @@ const onClickRegister = async () => {
   }
 
   try {
-    const response = await register(name.value, username.value, password.value)
+    const response = await register(username.value, password.value)
     const accessToken = response.access_token
     store.setToken(accessToken)
     router.push({ path: '/', replace: true })
