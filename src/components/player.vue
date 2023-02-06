@@ -62,7 +62,6 @@ store.$subscribe((mutation, state) => {
   }
 
   .video-container {
-    outline: 1px solid teal;
     @apply
       my-4
       mx-3;
