@@ -47,7 +47,7 @@ router.beforeEach((to, from) => {
     return '/login'
   }
 
-  if (token != null && to.path === '/login') {
+  if (token != null && !requireAuth(to.path)) {
     return '/'
   }
 

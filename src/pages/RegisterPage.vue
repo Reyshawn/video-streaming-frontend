@@ -19,7 +19,7 @@
         <input type="password" v-model="repeatedPassword" placeholder="Repeat password for cofirmation">
       </div>
       <div class="login-form-buttons">
-        <button @click.prevent="" class="sign-in-button">Register</button>
+        <button @click.prevent="onClickRegister" class="sign-in-button">Register</button>
         <span class="login-form-buttons-register-tips">
           Already have an account?
           <button class="register-button" @click.prevent="onClickSignIn">
@@ -34,7 +34,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { login } from '../apis/users';
+import { register } from '../apis/users';
 import { router } from '../routes';
 import { userStore } from '../store/UserStore';
 
@@ -43,6 +43,28 @@ const username = ref('')
 const password = ref('')
 const repeatedPassword = ref('')
 const store = userStore()
+
+const onClickRegister = async () => {
+  if (username.value === '') {
+    alert("Username is empty.")
+    return
+  }
+
+  if (password.value !== '' && password.value !== repeatedPassword.value) {
+    alert("Passwords don't match.")
+    return
+  }
+
+  try {
+    const response = await register(name.value, username.value, password.value)
+    const accessToken = response.access_token
+    store.setToken(accessToken)
+    router.push({ path: '/', replace: true })
+  } catch (err) {
+    throw err
+  }
+}
+
 
 const onClickSignIn = () => {
   router.push({ path: '/login' }) 
