@@ -2,7 +2,7 @@
   <div class="player">
     <h2 class="video-title">{{ videoTitle }}</h2>
     <div class="video-container">
-      <video v-if="videoSource" controls muted="true" autoplay ref="videoPlayer"> 
+      <video v-if="videoSource" controls muted="true" ref="videoPlayer"> 
         <source :src="videoSource" type="video/mp4">
       </video>
       <div v-else class="no-video-source-selected">
@@ -37,8 +37,10 @@ const videoSource = computed(() => {
 
 store.$subscribe((mutation, state) => {
   videoPlayer.value?.load()
-  const name = state.videos.filter(v => v.id === state.playing)[0].name || ''
-  videoTitle.value = name.slice(0, name.lastIndexOf("."));
+  videoPlayer.value!.currentTime = 8
+  const name = state.videos.filter(v => v.id === state.playing)?.[0]?.name
+  videoTitle.value = name ? name.slice(0, name.lastIndexOf(".")) : ''
+  
 })
 
 </script>
