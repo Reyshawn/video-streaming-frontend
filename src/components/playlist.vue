@@ -2,8 +2,8 @@
   <div class="playlist">
     <h2 class="playlist-title">Playlist</h2>
     <ul>
-      <li v-for="(item, index) in videos" class="playlist-item">
-        <span>{{ item.title }}</span>
+      <li v-for="(item, index) in store.videos" class="playlist-item">
+        <span>{{ item.name }}</span>
         <div>
           <svg class="playlist-item-icon" fill="#000000" viewBox="0 0 297 297">
             <path d="M148.5,0C66.486,0,0,66.486,0,148.5S66.486,297,148.5,297S297,230.514,297,148.5S230.514,0,148.5,0z M202.79,161.734
@@ -18,31 +18,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-const videos = ref([
-  { title: '【陈一发儿】随便聊聊：这是可以说的吗？我现在越来越少逛b站是因为……oo' },
-  { title: 'Mac mini 评测：从没用过 Mac，mini 好用吗？' },
-  { title: 'Best way to create GraphQL API ?? | NestJS GraphQL Tutorial' },
-  { title: '【陈一发儿】随便聊聊：这是可以说的吗？我现在越来越少逛b站是因为……oo' },
-  { title: 'Mac mini 评测：从没用过 Mac，mini 好用吗？' },
-  { title: 'Best way to create GraphQL API ?? | NestJS GraphQL Tutorial' },
-  { title: '【陈一发儿】随便聊聊：这是可以说的吗？我现在越来越少逛b站是因为……oo' },
-  { title: 'Mac mini 评测：从没用过 Mac，mini 好用吗？' },
-  { title: 'Best way to create GraphQL API ?? | NestJS GraphQL Tutorial' },
-  { title: '【陈一发儿】随便聊聊：这是可以说的吗？我现在越来越少逛b站是因为……oo' },
-  { title: 'Mac mini 评测：从没用过 Mac，mini 好用吗？' },
-  { title: 'Best way to create GraphQL API ?? | NestJS GraphQL Tutorial' },
-  { title: 'Mac mini 评测：从没用过 Mac，mini 好用吗？' },
-  { title: 'Best way to create GraphQL API ?? | NestJS GraphQL Tutorial' },
-  { title: '【陈一发儿】随便聊聊：这是可以说的吗？我现在越来越少逛b站是因为……oo' },
-  { title: 'Mac mini 评测：从没用过 Mac，mini 好用吗？' },
-  { title: 'Best way to create GraphQL API ?? | NestJS GraphQL Tutorial' },
-  { title: 'Mac mini 评测：从没用过 Mac，mini 好用吗？' },
-  { title: 'Best way to create GraphQL API ?? | NestJS GraphQL Tutorial' },
-  { title: '【陈一发儿】随便聊聊：这是可以说的吗？我现在越来越少逛b站是因为……oo' },
-  { title: 'Mac mini 评测：从没用过 Mac，mini 好用吗？' },
-  { title: 'Best way to create GraphQL API ?? | NestJS GraphQL Tutorial' },
-])
+import { onMounted } from 'vue'
+import { videoStore } from '../store/VideoStore';
+import { getAllVideos } from '../apis/videos';
+
+const store = videoStore()
+
+
+const refreshPlaylist = async () => {
+  try {
+    const response = await getAllVideos()
+    store.videos = response
+  } catch (err){
+    throw err
+  }
+}
+
+onMounted(() => {
+  refreshPlaylist()
+})
 
 </script>
 
@@ -77,6 +71,7 @@ const videos = ref([
         py-2
         flex
         items-center
+        justify-between
         cursor-pointer
         hover:bg-blue-900
         hover:text-slate-50;

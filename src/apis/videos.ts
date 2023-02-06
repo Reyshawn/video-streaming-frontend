@@ -8,3 +8,10 @@ export function upload(formData: FormData): Promise<any> {
     data: formData
   })
 }
+
+export function getAllVideos(): Promise<any> {
+  return request({
+    url: videos.all,
+    method: 'get'
+  })
+}

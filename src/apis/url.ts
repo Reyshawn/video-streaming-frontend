@@ -7,5 +7,6 @@ export const users = {
 }
 
 export const videos = {
-  upload: baseUrl + '/api/video/upload'
+  upload: baseUrl + '/api/video/upload',
+  all: baseUrl + '/videos'
 }

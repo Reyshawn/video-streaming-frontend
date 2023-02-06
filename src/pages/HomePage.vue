@@ -132,7 +132,8 @@ main {
     width: 250px;
 
     @apply
-      my-5;
+      my-5
+      shrink-0;
   }
 }
 
