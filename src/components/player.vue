@@ -2,7 +2,7 @@
   <div class="player">
     <h2 class="video-title">This is video title</h2>
     <div class="video-container">
-      <video controls muted="true" autoplay> 
+      <video controls muted="true" autoplay ref="videoPlayer"> 
         <source :src="videoSource" type="video/mp4">
       </video>
     </div>
@@ -20,9 +20,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { videos } from '../apis/url';
+import { videoStore } from '../store/VideoStore';
+import { computed, ref } from '@vue/reactivity';
 
-const videoSource = ref('')
+
+const store = videoStore()
+const videoPlayer = ref<HTMLVideoElement|null>(null)
+
+const videoSource = computed(() => {
+  if (store.playing == null ) {
+    return ''
+  }
+
+  return videos.stream + `/${store.playing}`
+})
+
+store.$subscribe((mutation, state) => {
+  videoPlayer.value?.load()
+})
 
 </script>
 

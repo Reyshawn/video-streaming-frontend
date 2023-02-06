@@ -2,15 +2,21 @@
   <div class="playlist">
     <h2 class="playlist-title">Playlist</h2>
     <ul>
-      <li v-for="(item, index) in store.videos" class="playlist-item">
-        <span>{{ item.name }}</span>
-        <div>
-          <svg class="playlist-item-icon" fill="#000000" viewBox="0 0 297 297">
-            <path d="M148.5,0C66.486,0,0,66.486,0,148.5S66.486,297,148.5,297S297,230.514,297,148.5S230.514,0,148.5,0z M202.79,161.734
-	          l-78.501,45.322c-2.421,1.398-5.326,2.138-8.083,2.138c-8.752,0-16.039-7.12-16.039-15.872v-90.645
-	          c0-8.752,7.287-15.872,16.039-15.872c2.758,0,5.579,0.739,8.001,2.138l78.542,45.322c4.966,2.867,7.951,8.001,7.951,13.734
-	          S207.756,158.867,202.79,161.734z"/>
-          </svg>
+      <li
+        v-for="(item, index) in store.videos"
+        class="playlist-item"
+        :class="{selected: store.playing === item.id}"
+        @click="play(item)">
+        <div class="playlist-item-inner">
+          <span>{{ item.name }}</span>
+          <div>
+            <svg class="playlist-item-icon" fill="#000000" viewBox="0 0 297 297">
+              <path d="M148.5,0C66.486,0,0,66.486,0,148.5S66.486,297,148.5,297S297,230.514,297,148.5S230.514,0,148.5,0z M202.79,161.734
+	            l-78.501,45.322c-2.421,1.398-5.326,2.138-8.083,2.138c-8.752,0-16.039-7.12-16.039-15.872v-90.645
+	            c0-8.752,7.287-15.872,16.039-15.872c2.758,0,5.579,0.739,8.001,2.138l78.542,45.322c4.966,2.867,7.951,8.001,7.951,13.734
+	            S207.756,158.867,202.79,161.734z"/>
+            </svg>
+          </div>
         </div>
       </li>
     </ul>
@@ -19,7 +25,7 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { videoStore } from '../store/VideoStore';
+import { videoStore, Video } from '../store/VideoStore';
 import { getAllVideos } from '../apis/videos';
 
 const store = videoStore()
@@ -32,6 +38,10 @@ const refreshPlaylist = async () => {
   } catch (err){
     throw err
   }
+}
+
+const play = (video: Video) => {
+  store.playing = video.id
 }
 
 onMounted(() => {
@@ -62,19 +72,22 @@ onMounted(() => {
   & > ul {
     overflow-y: scroll;
     @apply
-      text-sm
-      divide-dashed
-      divide-y
-      px-2;
-    li {
+      text-sm;
+    .playlist-item {
       @apply
-        py-2
-        flex
-        items-center
-        justify-between
+        px-2
         cursor-pointer
+        text-neutral-700
         hover:bg-blue-900
         hover:text-slate-50;
+
+        &-inner {
+          @apply
+            py-2
+            flex
+            items-center
+            justify-between;
+        }
 
         span {
           @apply
@@ -93,6 +106,27 @@ onMounted(() => {
         svg {
           fill: #facc15;
         }
+      }
+
+      &.selected {
+        @apply
+          bg-yellow-400;
+
+        &:hover {
+          @apply
+            text-neutral-700;
+          svg {
+            fill: #000000;
+          }
+        }
+      }
+    }
+
+    & > *:not(:last-of-type) {
+      .playlist-item-inner {
+        @apply
+          border-b
+          border-dashed;
       }
     }
   }

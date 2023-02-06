@@ -7,13 +7,11 @@ export interface Video {
   name: string
   notes: string
   size: number
-  url: string
 }
 
 export const videoStore = defineStore('videoStore', () => {
   const videos = ref<Video[]>([])
-  const playing = ref('')
-
+  const playing = ref<number|null>(null)
 
   return {
     videos,

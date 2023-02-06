@@ -4,15 +4,15 @@
       <h1 class="login-form-title">Register</h1>
       <div class="login-form-field register-form-field required">
         <label for="">Username</label>
-        <input type="text" v-model="username" placeholder="Type username">
+        <input type="text" v-model="username">
       </div>
       <div class="login-form-field register-form-field required">
         <label for="">Password</label>
-        <input type="password" v-model="password" placeholder="Type password">
+        <input type="password" v-model="password">
       </div>
       <div class="login-form-field register-form-field required">
         <label for="">Repeated Password</label>
-        <input type="password" v-model="repeatedPassword" placeholder="Repeat password for cofirmation">
+        <input type="password" v-model="repeatedPassword">
       </div>
       <div class="login-form-buttons">
         <button @click.prevent="onClickRegister" class="sign-in-button">Register</button>
