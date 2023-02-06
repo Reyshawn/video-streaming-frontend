@@ -1,19 +1,18 @@
 <template>
   <div class="player">
-    <h2 class="video-title">This is video title</h2>
+    <h2 class="video-title">{{ videoTitle }}</h2>
     <div class="video-container">
-      <video controls muted="true" autoplay ref="videoPlayer"> 
+      <video v-if="videoSource" controls muted="true" autoplay ref="videoPlayer"> 
         <source :src="videoSource" type="video/mp4">
       </video>
+      <div v-else class="no-video-source-selected">
+        <p>No videos selected.</p>
+      </div>
     </div>
     
     <h2 class="video-title">Notes</h2>
     <div class="video-notes">
-      “Leashing your dog during walks is a key to letting him know that you’re his master. I, however, am not my dog’s master. My dog is my equal, and we are both masters of our own destinies.”
-      “Leashing your dog during walks is a key to letting him know that you’re his master. I, however, am not my dog’s master. My dog is my equal, and we are both masters of our own destinies.”
-      “Leashing your dog during walks is a key to letting him know that you’re his master. I, however, am not my dog’s master. My dog is my equal, and we are both masters of our own destinies.”
-      “Leashing your dog during walks is a key to letting him know that you’re his master. I, however, am not my dog’s master. My dog is my equal, and we are both masters of our own destinies.”
-      “Leashing your dog during walks is a key to letting him know that you’re his master. I, however, am not my dog’s master. My dog is my equal, and we are both masters of our own destinies.”
+      😣 `Notes` feature will be released in the near future.
     </div>
 
   </div> 
@@ -24,7 +23,7 @@ import { videos } from '../apis/url';
 import { videoStore } from '../store/VideoStore';
 import { computed, ref } from '@vue/reactivity';
 
-
+const videoTitle = ref('')
 const store = videoStore()
 const videoPlayer = ref<HTMLVideoElement|null>(null)
 
@@ -38,6 +37,8 @@ const videoSource = computed(() => {
 
 store.$subscribe((mutation, state) => {
   videoPlayer.value?.load()
+  const name = state.videos.filter(v => v.id === state.playing)[0].name || ''
+  videoTitle.value = name.slice(0, name.lastIndexOf("."));
 })
 
 </script>
@@ -74,6 +75,24 @@ store.$subscribe((mutation, state) => {
   .video-notes {
     overflow-y: scroll;
   }
+}
+
+.no-video-source-selected {
+  @apply
+    relative
+    border-2
+    border-dashed
+    aspect-video;
+
+    p {
+      transform: translate(-50%, -50%);
+      @apply
+        text-neutral-300
+        text-4xl
+        absolute
+        top-1/2
+        left-1/2;
+    }
 }
 
 </style>
