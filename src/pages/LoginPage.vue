@@ -41,6 +41,7 @@ const onClickSignIn = async () => {
     store.setToken(accessToken)
     router.push({ path: '/', replace: true })
   } catch (err) {
+    alert('Username or password could be wrong.')
     throw err
   }
 }

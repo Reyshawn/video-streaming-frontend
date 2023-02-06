@@ -3,7 +3,7 @@
     <div class="navigation-bar">
       <div class="navigation-bar-left">
         <h1>Video Steaming Application</h1>
-        <uploader />
+        <uploader v-if="store.role === Permission.admin" />
       </div>
       <div class="navigation-bar-right">
         <img src="/vite.svg" alt="user avatar">
@@ -35,6 +35,7 @@ import uploader from '../components/uploader.vue'
 import { userStore } from '../store/UserStore';
 import { onMounted } from 'vue';
 import { getInfo } from '../apis/users';
+import { Permission } from '../store/UserStore';
 
 const store = userStore()
 
