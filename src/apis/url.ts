@@ -8,6 +8,8 @@ export const users = {
 
 export const videos = {
   upload: baseUrl + '/s/video/upload',
-  all: baseUrl + '/videos',
-  stream: baseUrl + '/s/video/stream'
+  stream: baseUrl + '/s/video/stream',
+  saveHistory: baseUrl + '/history',
+  all: baseUrl + '/videos/all',
+  watched: baseUrl + '/videos/watched'
 }

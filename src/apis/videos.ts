@@ -15,3 +15,20 @@ export function getAllVideos(): Promise<any> {
     method: 'get'
   })
 }
+
+export function saveHisotry(paylaod: {userId: number, videoId: number, progress: number}): Promise<any> {
+  return request({
+    url: videos.saveHistory,
+    method: 'post',
+    data: {
+      ...paylaod
+    }
+  })
+}
+
+export function getWatchedVideos(): Promise<any> {
+  return request({
+    url: videos.watched,
+    method: 'get'
+  })
+} 

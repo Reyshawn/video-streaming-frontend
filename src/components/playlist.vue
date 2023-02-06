@@ -1,6 +1,17 @@
 <template>
   <div class="playlist">
-    <h2 class="playlist-title">Playlist</h2>
+    <h2 class="playlist-title">
+      <span
+        :class="{selected: currentPlaylist === PlaylistType.all}" 
+        @click="currentPlaylist = PlaylistType.all">
+        Playlist
+      </span>
+      <span
+        :class="{selected: currentPlaylist === PlaylistType.watched}" 
+        @click="currentPlaylist = PlaylistType.watched">
+        Watched
+      </span>
+    </h2>
     <ul>
       <li
         v-for="(item, index) in store.videos"
@@ -24,16 +35,32 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { videoStore, Video } from '../store/VideoStore';
-import { getAllVideos } from '../apis/videos';
+import { getAllVideos, getWatchedVideos } from '../apis/videos';
+
+enum PlaylistType {
+  all,
+  watched
+}
 
 const store = videoStore()
-
+const currentPlaylist = ref(PlaylistType.all)
 
 const refreshPlaylist = async () => {
   try {
-    const response = await getAllVideos()
+    let response: any = []
+    switch (currentPlaylist.value) {
+      case PlaylistType.all:
+      response = await getAllVideos()
+      break
+      case PlaylistType.watched:
+      response = await getWatchedVideos()
+      break
+      default:
+      break
+    }
+
     store.videos = response
   } catch (err){
     throw err
@@ -45,6 +72,10 @@ const play = (video: Video) => {
 }
 
 onMounted(() => {
+  refreshPlaylist()
+})
+
+watch(currentPlaylist, () => {
   refreshPlaylist()
 })
 
@@ -63,10 +94,22 @@ onMounted(() => {
 
   &-title {
     @apply
-      font-semibold
       border-b
       py-1
-      mx-2;
+      mx-2
+      cursor-pointer;
+
+    span.selected {
+      @apply 
+        font-semibold;
+    }
+
+    & > *:not(:last-child) {
+      @apply
+        mr-3
+        pr-3
+        border-r
+    }
   }
 
   & > ul {
