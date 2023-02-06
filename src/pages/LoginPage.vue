@@ -11,7 +11,13 @@
         <input type="password" v-model="password">
       </div>
       <div class="login-form-buttons">
-        <button @click.prevent="onClickSignIn">Sign in</button>
+        <button @click.prevent="onClickSignIn" class="sign-in-button">Sign in</button>
+        <span class="login-form-buttons-register-tips">
+          Don't have an account?
+          <button class="register-button" @click.prevent="onClickRegister">
+            Register
+          </button>
+        </span>
       </div>
     </form>
   </div>
@@ -37,6 +43,10 @@ const onClickSignIn = async () => {
   } catch (err) {
     throw err
   }
+}
+
+const onClickRegister = () => {
+  router.push({ path: '/register' }) 
 }
 
 </script>
@@ -90,9 +100,12 @@ const onClickSignIn = async () => {
 
   &-buttons {
     @apply
-      mt-3;
+      mt-3
+      flex
+      items-center
+      justify-between;
 
-    button {
+    .sign-in-button {
       @apply
         bg-blue-900
         text-fuchsia-50
@@ -100,6 +113,17 @@ const onClickSignIn = async () => {
         px-2
         py-1
         rounded-lg;
+    }
+
+    .register-button {
+      @apply
+        font-semibold
+        text-red-700;
+    }
+
+    &-register-tips {
+      @apply  
+        text-xs;
     }
   }
 }
